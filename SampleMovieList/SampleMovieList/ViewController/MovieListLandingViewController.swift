@@ -7,6 +7,7 @@
 //
 import UIKit
 class MovieListLandingViewController: UIViewController {
+    var viewModel: NowPlayingViewModel = NowPlayingViewModel(networkManager: NetworkManager())
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(ComponentMovieListCell.nib,
@@ -15,6 +16,7 @@ class MovieListLandingViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.reloadDataWithSucess()
     }
 }
 // MARK: - UICollectioViewDataSource methods
