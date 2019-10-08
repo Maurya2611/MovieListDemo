@@ -17,20 +17,34 @@ class MovieListLandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.reloadDataWithSucess()
+        self.title = "Movie List"
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        viewModel.reloadTable = { [weak self] in
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.50) {
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
     }
 }
 // MARK: - UICollectioViewDataSource methods
 extension MovieListLandingViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return  1
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return viewModel.movieDataResult?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ComponentMovieListCell.reuseIdentifier,
                                                       for: indexPath) as? ComponentMovieListCell
+        if let movieResult = viewModel.movieDataResult?[indexPath.row] {
+            cell?.configureCellWithData(moviePostUrl: movieResult.posterPath)
+        }
         return cell ?? UICollectionViewCell()
     }
 }
@@ -38,8 +52,7 @@ extension MovieListLandingViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.size.width ,
-                      height: 100)
+        return CGSize(width: (collectionView.frame.size.width) / 3.05, height: ComponentMovieListCell.cellHeight)
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -56,6 +69,6 @@ extension MovieListLandingViewController: UICollectionViewDelegate, UICollection
     minimumLineSpacingForSectionAtIndex:) func collectionView(_ collectionView: UICollectionView,
                                                               layout collectionViewLayout: UICollectionViewLayout,
                                                               minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16.0
+        return 5
     }
 }

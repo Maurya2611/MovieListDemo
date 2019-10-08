@@ -11,7 +11,8 @@ import UIKit
 let imageCache = NSCache<NSString, AnyObject>()
 extension UIImageView {
     func loadImageUsingCache(withUrl urlString: String) {
-        if let url = URL(string: urlString) {
+        let baseUrl: String = String(format: "https://image.tmdb.org/t/p/w500/%@", urlString)
+        if let url = URL(string: baseUrl) {
             DispatchQueue.main.async {
                 self.image = nil
             }

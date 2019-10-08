@@ -54,6 +54,36 @@ struct NetworkManager {
             }
         }
     }
+    
+    func getSimilarMovieData(movieID: Int,
+                               completion: @escaping (_ dataModel: [MovieResult]?,
+        _ error: String?) -> Void) {
+        router.request(.similar(id: movieID)) { data, response, error in
+            if error != nil {
+                completion(nil, error?.localizedDescription)
+            }
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    do {
+                        print(responseData)
+                        let apiResponse = try BaseDataModel.init(data: responseData)
+                        completion(apiResponse.movieResults, nil)
+                    } catch {
+                        print(error)
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+            }
+        }
+    }
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String> {
         switch response.statusCode {
         case 200...299: return .success

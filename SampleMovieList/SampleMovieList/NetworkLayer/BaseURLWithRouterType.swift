@@ -13,7 +13,7 @@ enum NetworkEnvironment {
 }
 public enum GetMovielistApi {
     case nowPlaying(page: Int)
-    case similar
+    case similar(id: Int)
 
 }
 extension GetMovielistApi: NetworkRouterType {
@@ -32,8 +32,8 @@ extension GetMovielistApi: NetworkRouterType {
         switch self {
         case .nowPlaying:
             return "now_playing"
-        case .similar:
-            return "popular"
+        case .similar(let id):
+            return "\(id)/similar"
         }
     }
     var httpMethod: HTTPMethod {
@@ -48,7 +48,7 @@ extension GetMovielistApi: NetworkRouterType {
         case .similar:
             return .requestParameters(bodyParameters: nil,
                                       bodyEncoding: .urlEncoding,
-                                      urlParameters: nil)
+                                      urlParameters: ["api_key": NetworkManager.movieAPIKey])
         }
     }
     var headers: HTTPHeaders? {
