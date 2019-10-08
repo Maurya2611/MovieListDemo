@@ -45,6 +45,7 @@
 		E0A2FFEA234C7A4A00425C79 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0A2FFDD234C7A4900425C79 /* Roboto-Bold.ttf */; };
 		E0A2FFEB234C7A4A00425C79 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0A2FFDE234C7A4900425C79 /* Roboto-Thin.ttf */; };
 		E0A2FFEC234C7A4A00425C79 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0A2FFDF234C7A4900425C79 /* Roboto-Black.ttf */; };
+		E0A2FFEE234C929700425C79 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFED234C929700425C79 /* UIView+Extensions.swift */; };
 		E45B3F7F20598B15A10A38B5 /* Pods_SampleMovieList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D1EA2C2D38D254D45E61F8F /* Pods_SampleMovieList.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +117,7 @@
 		E0A2FFDD234C7A4900425C79 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		E0A2FFDE234C7A4900425C79 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		E0A2FFDF234C7A4900425C79 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		E0A2FFED234C929700425C79 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		E3D63FFAA70AE5269E3B18B8 /* Pods_SampleMovieList_SampleMovieListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleMovieList_SampleMovieListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -245,6 +247,7 @@
 		E0A2FF9A234C337A00425C79 /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				E0A2FFED234C929700425C79 /* UIView+Extensions.swift */,
 				E0A2FFCF234C733A00425C79 /* UIImageView+Extension.swift */,
 			);
 			path = Extentions;
@@ -578,6 +581,7 @@
 			files = (
 				E0A2FFBB234C40A800425C79 /* ParameterEncoding.swift in Sources */,
 				E0A2FFA5234C35A000425C79 /* BaseReuseableView.swift in Sources */,
+				E0A2FFEE234C929700425C79 /* UIView+Extensions.swift in Sources */,
 				E0A2FF4C234C2F6000425C79 /* SampleMovieList.xcdatamodeld in Sources */,
 				E0A2FF44234C2F6000425C79 /* AppDelegate.swift in Sources */,
 				E0A2FFCE234C72A200425C79 /* BaseConstant.swift in Sources */,

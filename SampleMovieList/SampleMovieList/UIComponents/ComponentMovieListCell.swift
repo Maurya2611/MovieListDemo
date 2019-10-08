@@ -9,17 +9,28 @@
 import UIKit
 class ComponentMovieListCell: BaseCell {
     static let cellHeight: CGFloat = 140
+    @IBOutlet weak var viewBG: UIView! {
+        didSet {
+            viewBG.layer.cornerRadius = 5
+            viewBG.layer.masksToBounds = true
+            viewBG.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var imgPoster: UIImageView! {
         didSet {
             imgPoster.backgroundColor = .clear
+            imgPoster.layer.cornerRadius = 5
             imgPoster.layer.masksToBounds = true
             imgPoster.clipsToBounds = true
-            imgPoster.layer.cornerRadius = 5
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        viewBG.shadowStyle(CGSize.zero, .allCorners, CGSize.zero, ColorUtils.blueGray, 0.80)
     }
     func configureCellWithData(moviePostUrl: String?) {
         imgPoster.loadImageUsingCache(withUrl: moviePostUrl ?? "")

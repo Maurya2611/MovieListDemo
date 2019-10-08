@@ -13,6 +13,7 @@ protocol reloadDataWithCollectionView {
 class NowPlayingViewModel: BaseProtocols {
     var movieDataResult: [MovieResult]?
     var networkManager: NetworkManager!
+    var page: Int = 0
     var reloadTable: () -> Void = { }
     var baseDataModel: BaseDataModel?
     init(networkManager: NetworkManager) {
@@ -22,15 +23,15 @@ class NowPlayingViewModel: BaseProtocols {
 extension NowPlayingViewModel: reloadDataWithCollectionView {
     func reloadDataWithSucess() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.networkManager.getNowPlayingListData(page: 1, completion: { ( movies, error) in
+            self.networkManager.getNowPlayingListData(page: self.page, completion: { ( movies, error) in
                 if let serverError = error, !serverError.isEmpty {
                 } else {
                     DispatchQueue.main.async {
                         guard let responseData = movies else {
                             return
                         }
-                        self.reloadTable()
                         self.movieDataResult = responseData
+                        self.reloadTable()
                     }
                 }
             })

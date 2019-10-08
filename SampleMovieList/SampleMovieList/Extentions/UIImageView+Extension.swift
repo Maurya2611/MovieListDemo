@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 let imageCache = NSCache<NSString, AnyObject>()
 extension UIImageView {
+    func addBorder() {
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor(red: 222/255.0, green: 225/255.0, blue: 227/255.0, alpha: 1.0).cgColor
+    }
     func loadImageUsingCache(withUrl urlString: String) {
         let baseUrl: String = String(format: "https://image.tmdb.org/t/p/w500/%@", urlString)
         if let url = URL(string: baseUrl) {

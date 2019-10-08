@@ -5,7 +5,7 @@
 //  Created by Chandresh on 8/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
 /*
-   let baseDataModel = try BaseDataModel(json)  */
+ let baseDataModel = try BaseDataModel(json)  */
 
 import Foundation
 struct BaseDataModel: Codable {

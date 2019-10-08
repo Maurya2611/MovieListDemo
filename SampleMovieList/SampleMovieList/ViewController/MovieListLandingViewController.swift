@@ -29,6 +29,14 @@ class MovieListLandingViewController: UIViewController {
             }
         }
     }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let isReachingEnd = collectionView.contentOffset.y >= 0
+            && collectionView.contentOffset.y >= (collectionView.contentSize.height - collectionView.frame.size.height)
+        if isReachingEnd {
+             viewModel.page += 1
+             viewModel.reloadDataWithSucess()
+        }
+    }
 }
 // MARK: - UICollectioViewDataSource methods
 extension MovieListLandingViewController: UICollectionViewDataSource {
@@ -62,13 +70,13 @@ extension MovieListLandingViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0)
     }
     @objc(collectionView:
     layout:
     minimumLineSpacingForSectionAtIndex:) func collectionView(_ collectionView: UICollectionView,
                                                               layout collectionViewLayout: UICollectionViewLayout,
                                                               minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 8
     }
 }

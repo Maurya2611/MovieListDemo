@@ -5,7 +5,6 @@
 //  Created by Chandresh on 30/9/19.
 //  Copyright © 2019 Chandresh Maurya. All rights reserved.
 //
-
 import Foundation
 import UIKit
 enum NetworkResponse: String {
@@ -56,9 +55,9 @@ struct NetworkManager {
     }
     
     func getSimilarMovieData(movieID: Int,
-                               completion: @escaping (_ dataModel: [MovieResult]?,
-        _ error: String?) -> Void) {
-        router.request(.similar(id: movieID)) { data, response, error in
+                             completion: @escaping (_ dataModel: [MovieResult]?,
+                             _ error: String?) -> Void) {
+        router.request(.similar(movieId: movieID)) { data, response, error in
             if error != nil {
                 completion(nil, error?.localizedDescription)
             }

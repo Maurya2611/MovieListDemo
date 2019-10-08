@@ -13,8 +13,7 @@ enum NetworkEnvironment {
 }
 public enum GetMovielistApi {
     case nowPlaying(page: Int)
-    case similar(id: Int)
-
+    case similar(movieId: Int)
 }
 extension GetMovielistApi: NetworkRouterType {
     var environmentBaseURL: String {
@@ -32,8 +31,8 @@ extension GetMovielistApi: NetworkRouterType {
         switch self {
         case .nowPlaying:
             return "now_playing"
-        case .similar(let id):
-            return "\(id)/similar"
+        case .similar(let movieId):
+            return "\(movieId)/similar"
         }
     }
     var httpMethod: HTTPMethod {
