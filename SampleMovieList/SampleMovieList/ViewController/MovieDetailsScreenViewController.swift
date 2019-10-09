@@ -10,16 +10,18 @@ import UIKit
 
 class MovieDetailsScreenViewController: MainBaseViewController {
     var viewModel: MovieDetailViewModel = MovieDetailViewModel(networkManager: NetworkManager())
+    var movieTittle: String? = ""
+    var movieSubTitle: String? = ""
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             self.parallaxCollectionView = collectionView
-            collectionView.register(ComponentMovieListCell.nib,
-                                    forCellWithReuseIdentifier: ComponentMovieListCell.reuseIdentifier)
+            collectionView.register(MovieDetailCell.nib,
+                                    forCellWithReuseIdentifier: MovieDetailCell.reuseIdentifier)
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationView.imgPoster.loadImageUsingCache(withUrl: viewModel.movieDetailData?.backdropPath ?? "")
+        self.navigationView.imgPoster.loadImageUsingCache(withUrl: viewModel.movieDetailData?.posterPath ?? "")
         self.title = viewModel.movieDetailData?.originalTitle?.uppercased()
         // Do any additional setup after loading the view.
     }
@@ -33,13 +35,26 @@ extension MovieDetailsScreenViewController: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-            ComponentMovieListCell.reuseIdentifier,
-            for: indexPath) as? ComponentMovieListCell
+            MovieDetailCell.reuseIdentifier,
+            for: indexPath) as? MovieDetailCell
+        if indexPath.row == 0 {
+            movieTittle = "Movie Release Date"
+            movieSubTitle = viewModel.getDatefromString()
+            cell?.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+        } else if indexPath.row == 1 {
+            movieTittle = "Movie Rating"
+            movieSubTitle = String(format: "%.1f / 10", viewModel.movieDetailData?.voteAverage ?? "")
+            cell?.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+        } else if indexPath.row == 2 {
+            movieTittle = "Movie Description"
+            movieSubTitle = viewModel.movieDetailData?.overview
+            cell?.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+        }
         return cell ?? UICollectionViewCell()
     }
 }
@@ -47,7 +62,15 @@ extension MovieDetailsScreenViewController: UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: ComponentMovieListCell.cellHeight)
+        if indexPath.row == 2 {
+            let descriptionHeight = self.heightOfLableAccordingContent(collectionView.frame.size.width,
+                                                    FontUtils.footNote,
+                                                    viewModel.movieDetailData?.overview ?? "",
+                                                    numberOfLines: 0)
+            return CGSize(width: collectionView.frame.size.width,
+                          height: descriptionHeight + MovieDetailCell.cellHeight)
+        }
+        return CGSize(width: collectionView.frame.size.width, height: MovieDetailCell.cellHeight)
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -67,4 +90,16 @@ extension MovieDetailsScreenViewController: UICollectionViewDelegate, UICollecti
         return 8
     }
 
+    func heightOfLableAccordingContent(_ width: CGFloat,
+                                       _ font: UIFont,
+                                       _ text: String,
+                                       numberOfLines: Int ) -> CGFloat {
+        let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = numberOfLines
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.height
+    }
 }

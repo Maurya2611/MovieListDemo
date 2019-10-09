@@ -22,19 +22,20 @@ class MovieDetailViewModel: MovieDetailProtocol {
 extension MovieDetailViewModel: reloadDataWithCollectionView {
     func reloadDataWithSucess(completion: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.networkManager.getSimilarMovieData(movieID: self.movieDetailData?.movieId ?? 0, completion: { ( movies, error) in
-                if let serverError = error, !serverError.isEmpty {
-                } else {
-                    DispatchQueue.main.async {
-                        guard movies != nil else {
-                            return
-                        }
-//                        self.movieDataResult += responseData.movieResults ?? self.movieDataResult
-//                        self.page += 1
-//                        self.totalPages = movies?.totalPages ?? 1
-                        completion()
-                    }
-                }
+            self.networkManager.getSimilarMovieData(movieID:
+                self.movieDetailData?.movieId ?? 0, completion: { ( movies, error) in
+                                                        if let serverError = error, !serverError.isEmpty {
+                                                        } else {
+                                                            DispatchQueue.main.async {
+                                                                guard movies != nil else {
+                                                                    return
+                                                                }
+                                                                //                        self.movieDataResult += responseData.movieResults ?? self.movieDataResult
+                                                                //                        self.page += 1
+                                                                //                        self.totalPages = movies?.totalPages ?? 1
+                                                                completion()
+                                                            }
+                                                        }
             })
         }
     }
@@ -48,5 +49,16 @@ extension MovieDetailViewModel: reloadDataWithCollectionView {
     // Condition to check load more data
     func shouldLoadMoreData(totalPage: Int, totalPageLoaded: Int) -> Bool {
         return ( totalPage >= totalPageLoaded )
+    }
+    func getDatefromString() -> String {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
+        var strDate = self.movieDetailData?.releaseDate
+        if let date = dateFormatterGet.date(from: self.movieDetailData?.releaseDate ?? "") {
+            strDate = dateFormatterPrint.string(from: date)
+        }
+        return strDate ?? ""
     }
 }

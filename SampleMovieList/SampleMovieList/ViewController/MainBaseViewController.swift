@@ -13,7 +13,7 @@ enum NavigationType {
     case main
 }
 let segementHeight: CGFloat = 40
-let parallexHeight: CGFloat = 260
+let parallexHeight: CGFloat = 400
 let screenRatio: CGFloat = 2.80
 let bottomPading: CGFloat = 16
 

@@ -31,7 +31,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MF9-c7-aOM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MF9-c7-aOM">
                                 <rect key="frame" x="15" y="45" width="384" height="55"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -58,6 +58,10 @@
                 <constraint firstAttribute="trailing" secondItem="jfk-2h-Vq5" secondAttribute="trailing" id="KcJ-2w-DM5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="lblSubTittle" destination="MF9-c7-aOM" id="Wj4-8i-PXA"/>
+                <outlet property="lblTittle" destination="WN5-z2-HwV" id="hld-U4-GuC"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="118.52678571428571"/>
         </collectionViewCell>
     </objects>

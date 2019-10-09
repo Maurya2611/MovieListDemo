@@ -72,7 +72,7 @@ struct FontUtils: FontProtocol {
         return mightyBaseFont(size: 12.0, weight: .regular)
     }
     static var captionOne: UIFont {
-        return mightyBaseFont(size: 12.0, weight: .bold)
+        return mightyBaseFont(size: 14.0, weight: .light)
     }
     static var label: UIFont {
         return mightyBaseFont(size: 11.0, weight: .regular)

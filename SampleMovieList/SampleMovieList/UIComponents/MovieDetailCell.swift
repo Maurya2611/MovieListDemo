@@ -8,24 +8,31 @@
 
 import UIKit
 class MovieDetailCell: BaseCell {
-    static let cellHeight: CGFloat = 180
+    static let cellHeight: CGFloat = 80
     @IBOutlet weak var viewBG: UIView! {
         didSet {
-            viewBG.layer.cornerRadius = 5
             viewBG.layer.masksToBounds = true
             viewBG.clipsToBounds = true
         }
     }
-    @IBOutlet weak var lblRelease: UILabel!
-    @IBOutlet weak var lbl: UILabel!
+    @IBOutlet weak var lblTittle: UILabel! {
+        didSet {
+            lblTittle.font = FontUtils.title2
+            lblTittle.textColor = ColorUtils.charcoalGray
+        }
+    }
+    @IBOutlet weak var lblSubTittle: UILabel! {
+        didSet {
+            lblSubTittle.font = FontUtils.captionOne
+            lblSubTittle.textColor = ColorUtils.charcoalGray
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        viewBG.shadowStyle(CGSize.zero, .allCorners, CGSize.zero, ColorUtils.blueGray, 0.80)
-    }
-    func configureCellWithData(moviePostUrl: String?) {
+    func configureCellWithData(tittle: String?, subTittle: String?) {
+        lblTittle.text = tittle
+        lblSubTittle.text = subTittle
     }
 }
