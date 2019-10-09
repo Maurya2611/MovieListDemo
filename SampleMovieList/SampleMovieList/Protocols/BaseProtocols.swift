@@ -1,5 +1,5 @@
 //
-//  baseProtocols.swift
+//  BaseProtocols.swift
 //  SampleMovieList
 //
 //  Created by Chandresh on 8/10/19.
