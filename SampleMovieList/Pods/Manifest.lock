@@ -1,20 +1,24 @@
 PODS:
   - RSLoadingView (1.1.3)
+  - SnapKit (5.0.1)
   - SwiftLint (0.35.0)
 
 DEPENDENCIES:
   - RSLoadingView
+  - SnapKit
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - RSLoadingView
+    - SnapKit
     - SwiftLint
 
 SPEC CHECKSUMS:
   RSLoadingView: c7749afdd455229643e8f34277d0695973a15b1a
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: 5553187048b900c91aa03552807681bb6b027846
 
-PODFILE CHECKSUM: ea2379d2b6718383460f3cde0d8107dafb583da0
+PODFILE CHECKSUM: 5ee5de5b21b686a4bb142776324187605d92ce8d
 
 COCOAPODS: 1.8.0.beta.2

@@ -6,6 +6,7 @@ target 'SampleMovieList' do
   use_frameworks!
   pod 'SwiftLint'
   pod 'RSLoadingView'
+  pod 'SnapKit'
 
   # Pods for SampleMovieList
 

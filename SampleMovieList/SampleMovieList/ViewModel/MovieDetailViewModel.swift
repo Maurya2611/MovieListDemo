@@ -1,17 +1,16 @@
 //
-//  NowPlayingViewModel.swift
+//  MovieDetailViewModel.swift
 //  SampleMovieList
 //
-//  Created by Chandresh on 8/10/19.
+//  Created by Chandresh on 9/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
 //
-
-import UIKit
-protocol reloadDataWithCollectionView {
-    func reloadDataWithSucess(completion: @escaping () -> Void)
+import Foundation
+protocol MovieDetailProtocol {
+    var movieDetailData: MovieResult? { get }
 }
-class NowPlayingViewModel: BaseProtocols {
-    var movieDataResult: [MovieResult] = [MovieResult]()
+class MovieDetailViewModel: MovieDetailProtocol {
+    var movieDetailData: MovieResult?
     var networkManager: NetworkManager!
     var page: Int = 1
     var totalPages: Int = 1
@@ -20,19 +19,19 @@ class NowPlayingViewModel: BaseProtocols {
         self.networkManager = networkManager
     }
 }
-extension NowPlayingViewModel: reloadDataWithCollectionView {
+extension MovieDetailViewModel: reloadDataWithCollectionView {
     func reloadDataWithSucess(completion: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.networkManager.getNowPlayingListData(page: self.page, completion: { ( movies, error) in
+            self.networkManager.getSimilarMovieData(movieID: self.movieDetailData?.movieId ?? 0, completion: { ( movies, error) in
                 if let serverError = error, !serverError.isEmpty {
                 } else {
                     DispatchQueue.main.async {
-                        guard let responseData = movies else {
+                        guard movies != nil else {
                             return
                         }
-                        self.movieDataResult += responseData.movieResults ?? self.movieDataResult
-                        self.page += 1
-                        self.totalPages = movies?.totalPages ?? 1
+//                        self.movieDataResult += responseData.movieResults ?? self.movieDataResult
+//                        self.page += 1
+//                        self.totalPages = movies?.totalPages ?? 1
                         completion()
                     }
                 }

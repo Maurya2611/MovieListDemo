@@ -28,11 +28,11 @@ class MovieListLandingViewController: UIViewController {
         }
         viewModel.reloadTable = { [weak self] in
             DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.50) {
+                self?.collectionView.reloadData()
+                self?.isRefreshInProgress = false
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
                     self?.loadingView.hide()
                     self?.loadingView.removeFromSuperview()
-                    self?.collectionView.reloadData()
-                    self?.isRefreshInProgress = false
                 }
             }
         }
@@ -40,11 +40,17 @@ class MovieListLandingViewController: UIViewController {
     func showOnViewTwins() {
         loadingView.shouldTapToDismiss = true
         loadingView.variantKey = "inAndOut"
-        loadingView.speedFactor = 2.0
+        loadingView.speedFactor = 1.0
         loadingView.lifeSpanFactor = 2.0
         loadingView.mainColor = UIColor.green
         loadingView.sizeInContainer = CGSize(width: 100, height: 100)
         loadingView.showOnKeyWindow()
+    }
+    private func navigateMovieDetailsWithSelectedMovieData(_ movieDetails: MovieResult) {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier:
+            "MovieDetailsScreenViewController") as? MovieDetailsScreenViewController else { return }
+         controller.viewModel.movieDetailData = movieDetails
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 // MARK: - UICollectioViewDataSource methods
@@ -95,5 +101,9 @@ extension MovieListLandingViewController: UICollectionViewDelegate, UICollection
                                                               layout collectionViewLayout: UICollectionViewLayout,
                                                               minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigateMovieDetailsWithSelectedMovieData(viewModel.movieDataResult[indexPath.row])
     }
 }

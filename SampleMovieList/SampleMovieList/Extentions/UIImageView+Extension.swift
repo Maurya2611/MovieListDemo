@@ -38,7 +38,7 @@ extension UIImageView {
                                             if let image = UIImage(data: data!) {
                                                 imageCache.setObject(image, forKey: urlString as NSString)
                                                 self.image = image
-                                                self.contentMode = .scaleAspectFill
+                                                self.contentMode = .scaleToFill
 
                                             } else {
                                                self.image = #imageLiteral(resourceName: "iconNoImage")
