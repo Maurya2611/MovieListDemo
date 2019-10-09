@@ -113,7 +113,7 @@ struct MovieResult: Codable {
     let movieId: Int?
     let adult: Bool?
     let backdropPath: String?
-    let originalLanguage: OriginalLanguage?
+    let originalLanguage: String?
     let originalTitle: String?
     let genreIDS: [Int]?
     let title: String?
@@ -121,18 +121,19 @@ struct MovieResult: Codable {
     let overview, releaseDate: String?
     
     enum CodingKeys: String, CodingKey {
-        case popularity
-        case voteCount = "vote_count"
-        case video
+        case popularity = "popularity"
+        case voteCount  = "vote_count"
+        case video      = "video"
         case posterPath = "poster_path"
-        case movieId = "id", adult
+        case movieId    = "id"
+        case adult      = "adult"
         case backdropPath = "backdrop_path"
         case originalLanguage = "original_language"
         case originalTitle = "original_title"
         case genreIDS = "genre_ids"
-        case title
+        case title    = "title"
         case voteAverage = "vote_average"
-        case overview
+        case overview    = "overview"
         case releaseDate = "release_date"
     }
 }
@@ -163,7 +164,7 @@ extension MovieResult {
         movieId: Int?? = nil,
         adult: Bool?? = nil,
         backdropPath: String?? = nil,
-        originalLanguage: OriginalLanguage?? = nil,
+        originalLanguage: String?? = nil,
         originalTitle: String?? = nil,
         genreIDS: [Int]?? = nil,
         title: String?? = nil,
@@ -198,12 +199,6 @@ extension MovieResult {
     }
 }
 
-enum OriginalLanguage: String, Codable {
-    case en = "en"
-    case ja = "ja"
-    case ru = "ru"
-    case tl = "tl"
-}
 // MARK: - Helper functions for creating encoders and decoders
 func newJSONDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()

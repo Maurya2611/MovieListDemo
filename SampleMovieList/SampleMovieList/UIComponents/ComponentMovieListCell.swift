@@ -8,7 +8,7 @@
 
 import UIKit
 class ComponentMovieListCell: BaseCell {
-    static let cellHeight: CGFloat = 140
+    static let cellHeight: CGFloat = 180
     @IBOutlet weak var viewBG: UIView! {
         didSet {
             viewBG.layer.cornerRadius = 5

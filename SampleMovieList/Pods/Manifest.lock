@@ -1,16 +1,20 @@
 PODS:
+  - RSLoadingView (1.1.3)
   - SwiftLint (0.35.0)
 
 DEPENDENCIES:
+  - RSLoadingView
   - SwiftLint
 
 SPEC REPOS:
   trunk:
+    - RSLoadingView
     - SwiftLint
 
 SPEC CHECKSUMS:
+  RSLoadingView: c7749afdd455229643e8f34277d0695973a15b1a
   SwiftLint: 5553187048b900c91aa03552807681bb6b027846
 
-PODFILE CHECKSUM: 1c27986f105a63616630d25e66e76b56312f9dbd
+PODFILE CHECKSUM: ea2379d2b6718383460f3cde0d8107dafb583da0
 
 COCOAPODS: 1.8.0.beta.2

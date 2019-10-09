@@ -25,7 +25,7 @@ struct NetworkManager {
     static let movieAPIKey = BaseConstant.movieAppKey
     let router = BaseNetworkRouter<GetMovielistApi>()
     func getNowPlayingListData(page: Int,
-                               completion: @escaping (_ dataModel: [MovieResult]?,
+                               completion: @escaping (_ dataModel: BaseDataModel?,
         _ error: String?) -> Void) {
         router.request(.nowPlaying(page: page)) { data, response, error in
             if error != nil {
@@ -42,7 +42,7 @@ struct NetworkManager {
                     do {
                         print(responseData)
                         let apiResponse = try BaseDataModel.init(data: responseData)
-                        completion(apiResponse.movieResults, nil)
+                        completion(apiResponse, nil)
                     } catch {
                         print(error)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)

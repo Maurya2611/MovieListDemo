@@ -9,5 +9,5 @@
 import Foundation
 import UIKit
 protocol BaseProtocols {
-    var movieDataResult: [MovieResult]? { get }
+    var movieDataResult: [MovieResult] { get }
 }
