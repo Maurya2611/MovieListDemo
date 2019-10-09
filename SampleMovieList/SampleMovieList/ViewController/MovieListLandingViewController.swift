@@ -74,7 +74,7 @@ extension MovieListLandingViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.size.width) / 3.05, height: ComponentMovieListCell.cellHeight)
+        return CGSize(width: (collectionView.frame.size.width) / 3.15, height: ComponentMovieListCell.cellHeight)
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -84,7 +84,7 @@ extension MovieListLandingViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets.init(top: 10, left: 5, bottom: 0, right: 5)
     }
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,

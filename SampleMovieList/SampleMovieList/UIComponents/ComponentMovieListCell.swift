@@ -30,7 +30,7 @@ class ComponentMovieListCell: BaseCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewBG.shadowStyle(CGSize.zero, .allCorners, CGSize.zero, ColorUtils.blueGray, 0.80)
+        viewBG.shadowStyle(CGSize.zero, .allCorners, ColorUtils.blueGray, 0.70)
     }
     func configureCellWithData(moviePostUrl: String?) {
         imgPoster.loadImageUsingCache(withUrl: moviePostUrl ?? "")

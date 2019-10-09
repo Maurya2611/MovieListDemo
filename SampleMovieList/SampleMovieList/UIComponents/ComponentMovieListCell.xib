@@ -23,15 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zwv-TK-6Sa">
-                                <rect key="frame" x="5" y="5" width="110" height="110"/>
+                                <rect key="frame" x="3" y="3" width="114" height="114"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.078431372550000003" green="0.96078431369999995" blue="0.41176470590000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="zwv-TK-6Sa" firstAttribute="top" secondItem="VFl-4k-QhF" secondAttribute="top" constant="5" id="GlE-aI-cmn"/>
-                            <constraint firstAttribute="trailing" secondItem="zwv-TK-6Sa" secondAttribute="trailing" constant="5" id="fh1-Ra-s7f"/>
-                            <constraint firstAttribute="bottom" secondItem="zwv-TK-6Sa" secondAttribute="bottom" constant="5" id="tlS-n6-Okc"/>
-                            <constraint firstItem="zwv-TK-6Sa" firstAttribute="leading" secondItem="VFl-4k-QhF" secondAttribute="leading" constant="5" id="x5a-Qy-gIF"/>
+                            <constraint firstItem="zwv-TK-6Sa" firstAttribute="top" secondItem="VFl-4k-QhF" secondAttribute="top" constant="3" id="GlE-aI-cmn"/>
+                            <constraint firstAttribute="trailing" secondItem="zwv-TK-6Sa" secondAttribute="trailing" constant="3" id="fh1-Ra-s7f"/>
+                            <constraint firstAttribute="bottom" secondItem="zwv-TK-6Sa" secondAttribute="bottom" constant="3" id="tlS-n6-Okc"/>
+                            <constraint firstItem="zwv-TK-6Sa" firstAttribute="leading" secondItem="VFl-4k-QhF" secondAttribute="leading" constant="3" id="x5a-Qy-gIF"/>
                         </constraints>
                     </view>
                 </subviews>

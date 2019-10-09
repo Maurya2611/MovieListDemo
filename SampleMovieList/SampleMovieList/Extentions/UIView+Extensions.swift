@@ -49,16 +49,14 @@ public extension UIView {
     }
     func shadowStyle(_ radius: CGSize,
                      _ corners: UIRectCorner,
-                     _ shadowOffset: CGSize,
                      _ shadowColor: UIColor,
                      _ shadowOpacity: Float) {
         self.layer.masksToBounds = false
-        self.backgroundColor = .clear
         self.clipsToBounds = true
         self.layer.cornerRadius = 5
         self.layer.shadowColor = shadowColor.cgColor
-        self.layer.shadowOffset = shadowOffset
-        self.layer.shadowRadius = 5
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowRadius = 8
         self.layer.shadowOpacity = shadowOpacity
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale

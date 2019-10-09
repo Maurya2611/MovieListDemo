@@ -9,7 +9,8 @@ import Foundation
 protocol MovieDetailProtocol {
     var movieDetailData: MovieResult? { get }
 }
-class MovieDetailViewModel: MovieDetailProtocol {
+class MovieDetailViewModel: MovieDetailProtocol, BaseProtocols {
+    var movieDataResult: [MovieResult] = [MovieResult]()
     var movieDetailData: MovieResult?
     var networkManager: NetworkManager!
     var page: Int = 1
@@ -24,18 +25,18 @@ extension MovieDetailViewModel: reloadDataWithCollectionView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.networkManager.getSimilarMovieData(movieID:
                 self.movieDetailData?.movieId ?? 0, completion: { ( movies, error) in
-                                                        if let serverError = error, !serverError.isEmpty {
-                                                        } else {
-                                                            DispatchQueue.main.async {
-                                                                guard movies != nil else {
-                                                                    return
-                                                                }
-                                                                //                        self.movieDataResult += responseData.movieResults ?? self.movieDataResult
-                                                                //                        self.page += 1
-                                                                //                        self.totalPages = movies?.totalPages ?? 1
-                                                                completion()
-                                                            }
-                                                        }
+                        if let serverError = error, !serverError.isEmpty {
+                        } else {
+                            DispatchQueue.main.async {
+                                guard movies != nil else {
+                                    return
+                                }
+                                self.movieDataResult += movies?.movieResults ?? self.movieDataResult
+                                self.page += 1
+                                self.totalPages = movies?.totalPages ?? 1
+                                completion()
+                    }
+                }
             })
         }
     }
@@ -61,4 +62,5 @@ extension MovieDetailViewModel: reloadDataWithCollectionView {
         }
         return strDate ?? ""
     }
+    
 }

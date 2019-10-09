@@ -55,8 +55,8 @@ struct NetworkManager {
     }
     
     func getSimilarMovieData(movieID: Int,
-                             completion: @escaping (_ dataModel: [MovieResult]?,
-                             _ error: String?) -> Void) {
+                             completion: @escaping (_ dataModel: BaseDataModel?,
+        _ error: String?) -> Void) {
         router.request(.similar(movieId: movieID)) { data, response, error in
             if error != nil {
                 completion(nil, error?.localizedDescription)
@@ -72,7 +72,7 @@ struct NetworkManager {
                     do {
                         print(responseData)
                         let apiResponse = try BaseDataModel.init(data: responseData)
-                        completion(apiResponse.movieResults, nil)
+                        completion(apiResponse, nil)
                     } catch {
                         print(error)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)

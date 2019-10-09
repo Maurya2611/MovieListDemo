@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import RSLoadingView
+
 enum NavigationType {
     case `default`
     case main
@@ -19,6 +21,8 @@ let bottomPading: CGFloat = 16
 
 class MainBaseViewController: UIViewController {
     let padding: CGFloat = 24
+    let loadingView = RSLoadingView(effectType: RSLoadingView.Effect.spinAlone)
+
     var navigationType: NavigationType {
         return .default
     }
@@ -181,6 +185,15 @@ class MainBaseViewController: UIViewController {
     }
     func systemVersionLessThan(version: String) -> Bool {
         return UIDevice.current.systemVersion.compare(version, options: .numeric) == .orderedAscending
+    }
+    func showOnViewTwins() {
+        loadingView.shouldTapToDismiss = true
+        loadingView.variantKey = "inAndOut"
+        loadingView.speedFactor = 1.0
+        loadingView.lifeSpanFactor = 2.0
+        loadingView.mainColor = UIColor.green
+        loadingView.sizeInContainer = CGSize(width: 100, height: 100)
+        loadingView.showOnKeyWindow()
     }
 }
 extension UIViewController {
