@@ -4,8 +4,7 @@
 //
 //  Created by Chandresh on 8/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
-/*
- let baseDataModel = try BaseDataModel(json)  */
+/* let baseDataModel = try BaseDataModel(json)  */
 
 import Foundation
 struct BaseDataModel: Codable {
@@ -26,18 +25,15 @@ extension BaseDataModel {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(BaseDataModel.self, from: data)
     }
-    
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
     func with(
         movieResults: [MovieResult]?? = nil,
         page: Int?? = nil,
@@ -53,38 +49,31 @@ extension BaseDataModel {
             totalPages: totalPages ?? self.totalPages
         )
     }
-    
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
 }
-
 // MARK: - Dates
 struct Dates: Codable {
     let maximum, minimum: String?
 }
-
 // MARK: Dates convenience initializers and mutators
 extension Dates {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Dates.self, from: data)
     }
-    
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
     func with(
         maximum: String?? = nil,
         minimum: String?? = nil
@@ -94,16 +83,13 @@ extension Dates {
             minimum: minimum ?? self.minimum
         )
     }
-    
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
 }
-
 // MARK: - MovieResult
 struct MovieResult: Codable {
     let popularity: Double?
@@ -119,7 +105,6 @@ struct MovieResult: Codable {
     let title: String?
     let voteAverage: Double?
     let overview, releaseDate: String?
-    
     enum CodingKeys: String, CodingKey {
         case popularity = "popularity"
         case voteCount  = "vote_count"
@@ -137,25 +122,20 @@ struct MovieResult: Codable {
         case releaseDate = "release_date"
     }
 }
-
 // MARK: MovieResult convenience initializers and mutators
-
 extension MovieResult {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(MovieResult.self, from: data)
     }
-    
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
     func with(
         popularity: Double?? = nil,
         voteCount: Int?? = nil,
@@ -189,16 +169,13 @@ extension MovieResult {
             releaseDate: releaseDate ?? self.releaseDate
         )
     }
-    
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
 }
-
 // MARK: - Helper functions for creating encoders and decoders
 func newJSONDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()
@@ -207,7 +184,6 @@ func newJSONDecoder() -> JSONDecoder {
     }
     return decoder
 }
-
 func newJSONEncoder() -> JSONEncoder {
     let encoder = JSONEncoder()
     if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {

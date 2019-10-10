@@ -11,7 +11,7 @@ class MovieListLandingViewController: UIViewController {
     var viewModel: NowPlayingViewModel = NowPlayingViewModel(networkManager: NetworkManager())
     var isRefreshInProgress = false
     let loadingView = RSLoadingView(effectType: RSLoadingView.Effect.spinAlone)
-
+    
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(ComponentMovieListCell.nib,
@@ -52,7 +52,7 @@ class MovieListLandingViewController: UIViewController {
     private func navigateMovieDetailsWithSelectedMovieData(_ movieDetails: MovieResult) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier:
             "MovieDetailsScreenViewController") as? MovieDetailsScreenViewController else { return }
-         controller.viewModel.movieDetailData = movieDetails
+        controller.viewModel.movieDetailData = movieDetails
         navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -67,7 +67,7 @@ extension MovieListLandingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ComponentMovieListCell.reuseIdentifier,
-            for: indexPath) as? ComponentMovieListCell
+                                                      for: indexPath) as? ComponentMovieListCell
         let movieResult = viewModel.movieDataResult[indexPath.row]
         cell?.configureCellWithData(moviePostUrl: movieResult.posterPath)
         return cell ?? UICollectionViewCell()

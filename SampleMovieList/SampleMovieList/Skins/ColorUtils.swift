@@ -96,7 +96,6 @@ struct ColorUtils {
         //#5ebd78
         return #colorLiteral(red: 0.368627451, green: 0.7411764706, blue: 0.4705882353, alpha: 1)
     }
-
     static var navGray: UIColor {
         //#f4f5f5
         return #colorLiteral(red: 0.9568627451, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
