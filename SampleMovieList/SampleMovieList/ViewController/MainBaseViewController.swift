@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 let calculateHeight: CGFloat = 44
-let parallexHeight: CGFloat = 380
+let parallexHeight: CGFloat = 400
 let screenRatio: CGFloat = 2.80
 let bottomPading: CGFloat = 16
 
