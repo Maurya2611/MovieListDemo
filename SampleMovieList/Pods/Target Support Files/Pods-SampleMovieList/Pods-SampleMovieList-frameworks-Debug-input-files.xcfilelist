@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-SampleMovieList/Pods-SampleMovieList-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/RSLoadingView/RSLoadingView.framework
+${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

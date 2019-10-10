@@ -27,8 +27,17 @@ class MovieListLandingViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        UtilsFunction.showOnLoader()
-        viewModel.loadMoreData()
+        if NetworkReachability.isInterNetExist() {
+            isRefreshInProgress = true
+            UtilsFunction.showOnLoader()
+            viewModel.loadMoreData()
+        } else {
+            let alert = UIAlertController(title: "No Internet connection",
+                                          message: "Turn on mobile data or use Wi-Fi to access data.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
         self.title = "Movie List"
         viewModel.reloadTable = { [weak self] in
             DispatchQueue.main.async {
@@ -39,15 +48,6 @@ class MovieListLandingViewController: UIViewController {
                 }
             }
         }
-    }
-    func showOnViewTwins() {
-        loadingView.shouldTapToDismiss = true
-        loadingView.variantKey = "inAndOut"
-        loadingView.speedFactor = 1.0
-        loadingView.lifeSpanFactor = 2.0
-        loadingView.mainColor = UIColor.green
-        loadingView.sizeInContainer = CGSize(width: 100, height: 100)
-        loadingView.showOnKeyWindow()
     }
     private func navigateMovieDetailsWithSelectedMovieData(_ movieDetails: MovieResult) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier:
