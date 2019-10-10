@@ -80,8 +80,7 @@ extension UIView {
                 blurAlpha: alpha
             )
         }
-        private func applyBlurEffect(style:  UIBlurEffect.Style,
-                                     blurAlpha: CGFloat) {
+        private func applyBlurEffect(style: UIBlurEffect.Style, blurAlpha: CGFloat) {
             superview.backgroundColor = UIColor.clear
             let blurEffect = UIBlurEffect(style: style)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
