@@ -18,15 +18,7 @@ class MainBaseViewController: UIViewController {
     weak var headerImageView: UIView?
     var imageView = UIImageView()
 
-    var parallaxTableView: UITableView! {
-        didSet {
-            if #available(iOS 11.0, *) {} else {
-                parallaxTableView.snp.updateConstraints { make in
-                    make.top.equalTo(-20)
-                }
-            }
-        }
-    }
+    var parallaxTableView: UITableView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)

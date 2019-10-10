@@ -14,10 +14,8 @@ class NetworkReachability: NSObject {
     static let sharedInstance: NetworkReachability = { return NetworkReachability()}()
     override init() {
         super.init()
-        
         // Initialise reachability
         reachability = Reachability()!
-        
         // Register an observer for the network status
         NotificationCenter.default.addObserver(
             self,
@@ -25,7 +23,6 @@ class NetworkReachability: NSObject {
             name: .reachabilityChanged,
             object: reachability
         )
-        
         do {
             // Start the network status notifier
             try reachability.startNotifier()
@@ -37,7 +34,6 @@ class NetworkReachability: NSObject {
     @objc func networkStatusChanged(_ notification: Notification) {
         // Do something globally here!
     }
-    
     static func stopNotifier() -> Void {
         do {
             // Stop the network status notifier
