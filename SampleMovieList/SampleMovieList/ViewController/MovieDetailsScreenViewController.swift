@@ -19,9 +19,17 @@ class MovieDetailsScreenViewController: MainBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UtilsFunction.showOnLoader()
         self.imageView.loadImageUsingCache(withUrl: viewModel.movieDetailData?.posterPath ?? "")
-        self.viewModel.loadMoreData()
+        if NetworkReachability.isInterNetExist() {
+            UtilsFunction.showOnLoader()
+            viewModel.loadMoreData()
+        } else {
+            let alert = UIAlertController(title: "No Internet connection",
+                                          message: "Turn on mobile data or use Wi-Fi to access data.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
         self.viewModel.reloadTable = { [weak self] in
             self?.tblview.reloadData()
             DispatchQueue.main.async {
