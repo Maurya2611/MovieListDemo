@@ -4,7 +4,6 @@
 //  Created by Chandresh on 8/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
 //
-
 import UIKit
 import ObjectiveC.runtime
 public typealias ParallaxHeaderHandlerBlock = (_ parallaxHeader: ParallaxHeader) -> Void
