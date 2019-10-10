@@ -18,6 +18,8 @@ class MovieDetailViewModel: MovieDetailProtocol, BaseProtocols {
     var page: Int = 1
     var totalPages: Int = 1
     var reloadTable: () -> Void = { }
+    var navigateSimilarMovieWithData: ((MovieResult) -> Void)?
+
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }

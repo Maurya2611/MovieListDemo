@@ -28,6 +28,12 @@ class MovieDetailsScreenViewController: MainBaseViewController {
                 UtilsFunction.hideOffLoader()
             }
         }
+        self.viewModel.navigateSimilarMovieWithData = { movieResult in
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier:
+                "MovieDetailsScreenViewController") as? MovieDetailsScreenViewController else { return }
+            controller.viewModel.movieDetailData = movieResult
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
 // MARK: - UITableViewDataSource Called Here

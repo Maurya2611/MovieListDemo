@@ -68,6 +68,8 @@ extension SimilarRelatedMovieCell: UICollectionViewDelegateFlowLayout {
 }
 extension SimilarRelatedMovieCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item selected at \(indexPath.row)")
+        if let movie = viewModel?.movieDataResult[indexPath.row] {
+            viewModel?.navigateSimilarMovieWithData!(movie)
+        }
     }
 }
