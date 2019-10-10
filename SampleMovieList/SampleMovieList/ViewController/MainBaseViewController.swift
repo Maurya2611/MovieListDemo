@@ -35,7 +35,7 @@ class MainBaseViewController: UIViewController {
         headerImageView = imageView
         parallaxTableView.parallaxHeader.view = headerImageView ?? imageView
         parallaxTableView.parallaxHeader.height = parallexHeight + (self.topSafeArea() * 2)
-        parallaxTableView.parallaxHeader.minimumHeight = calculateHeight
+        parallaxTableView.parallaxHeader.minimumHeight = calculateHeight + self.topSafeArea()
         parallaxTableView.parallaxHeader.mode = .centerFill
         parallaxTableView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             //update alpha of blur view on top of image view
