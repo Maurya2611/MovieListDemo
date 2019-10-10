@@ -1,13 +1,13 @@
 //
-//  SimilarRelatedCollectionCell.swift
+//  SimilarRelatedMovieCell.swift
 //  SampleMovieList
 //
-//  Created by Chandresh on 9/10/19.
+//  Created by Chandresh on 10/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
 //
 
 import UIKit
-class SimilarRelatedCollectionCell: BaseCell {
+class SimilarRelatedMovieCell: BaseReusableTableView {
     static let cellHeight: CGFloat = 320
     var viewModel: MovieDetailViewModel?
     @IBOutlet weak var collectionView: UICollectionView! {
@@ -25,7 +25,7 @@ class SimilarRelatedCollectionCell: BaseCell {
         self.collectionView.reloadData()
     }
 }
-extension SimilarRelatedCollectionCell: UICollectionViewDataSource {
+extension SimilarRelatedMovieCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -35,7 +35,7 @@ extension SimilarRelatedCollectionCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt
         indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselContentViewCell.reuseIdentifier,
-            for: indexPath) as? CarouselContentViewCell
+                                                      for: indexPath) as? CarouselContentViewCell
         if viewModel?.movieDataResult.count ?? 1 > 0 {
             let movieResult = viewModel?.movieDataResult[indexPath.row]
             cell?.loadCellWithData(imageURL: movieResult?.posterPath)
@@ -43,7 +43,7 @@ extension SimilarRelatedCollectionCell: UICollectionViewDataSource {
         return cell ?? UICollectionViewCell(frame: CGRect.zero)
     }
 }
-extension SimilarRelatedCollectionCell: UICollectionViewDelegateFlowLayout {
+extension SimilarRelatedMovieCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -65,16 +65,8 @@ extension SimilarRelatedCollectionCell: UICollectionViewDelegateFlowLayout {
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        if indexPath.row == viewModel?.movieDataResult.count ?? 0 - 1 {
-            // this is the last cell, load more data
-            viewModel?.loadMoreData()
-        }
-    }
 }
-extension SimilarRelatedCollectionCell: UICollectionViewDelegate {
+extension SimilarRelatedMovieCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Item selected at \(indexPath.row)")
     }

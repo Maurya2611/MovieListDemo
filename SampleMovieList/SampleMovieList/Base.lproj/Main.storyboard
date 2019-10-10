@@ -60,33 +60,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="T1p-wx-Yi6">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k0e-qB-mnq">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Awe-gO-ZY4">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="gaG-Ko-HpR" id="57T-wX-EWI"/>
-                                    <outlet property="delegate" destination="gaG-Ko-HpR" id="2N7-Wv-x14"/>
+                                    <outlet property="dataSource" destination="gaG-Ko-HpR" id="ykq-vd-tdI"/>
+                                    <outlet property="delegate" destination="gaG-Ko-HpR" id="jFu-Sn-WH4"/>
                                 </connections>
-                            </collectionView>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="T1p-wx-Yi6" firstAttribute="top" secondItem="nAt-pB-9UT" secondAttribute="top" id="DtF-C5-Nxh"/>
-                            <constraint firstItem="T1p-wx-Yi6" firstAttribute="bottom" secondItem="VMT-AM-vMP" secondAttribute="bottom" id="JxK-ue-Aeh"/>
-                            <constraint firstItem="T1p-wx-Yi6" firstAttribute="trailing" secondItem="VMT-AM-vMP" secondAttribute="trailing" id="PAX-UU-6hk"/>
-                            <constraint firstItem="T1p-wx-Yi6" firstAttribute="leading" secondItem="VMT-AM-vMP" secondAttribute="leading" id="mYe-BW-Z5T"/>
+                            <constraint firstItem="k0e-qB-mnq" firstAttribute="top" secondItem="nAt-pB-9UT" secondAttribute="top" id="6X7-28-4s5"/>
+                            <constraint firstItem="k0e-qB-mnq" firstAttribute="leading" secondItem="VMT-AM-vMP" secondAttribute="leading" id="OWm-gu-Ygf"/>
+                            <constraint firstAttribute="bottom" secondItem="k0e-qB-mnq" secondAttribute="bottom" id="mrw-Jp-EnU"/>
+                            <constraint firstItem="k0e-qB-mnq" firstAttribute="trailing" secondItem="VMT-AM-vMP" secondAttribute="trailing" id="tb9-nC-wvD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VMT-AM-vMP"/>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="T1p-wx-Yi6" id="3OY-z4-iHe"/>
+                        <outlet property="tblview" destination="k0e-qB-mnq" id="wwX-Wi-Vnd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QKl-6a-7Mt" userLabel="First Responder" sceneMemberID="firstResponder"/>

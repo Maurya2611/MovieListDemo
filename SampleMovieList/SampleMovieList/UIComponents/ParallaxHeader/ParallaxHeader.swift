@@ -1,19 +1,18 @@
+//
+//  ParallaxHeader.swift
+//  SampleMovieList
+//  Created by Chandresh on 8/10/19.
+//  Copyright © 2019 Chandresh. All rights reserved.
+//
+
 import UIKit
 import ObjectiveC.runtime
-public enum ParallaxHeaderMode: Int {
-    case fill = 0
-    case top
-    case topFill
-    case center
-    case centerFill
-    case bottom
-    case bottomFill
-}
 public typealias ParallaxHeaderHandlerBlock = (_ parallaxHeader: ParallaxHeader) -> Void
 private let parallaxHeaderKVOContext = UnsafeMutableRawPointer.allocate(
     byteCount: 4,
     alignment: 1
 )
+
 class ParallaxView: UIView {
     fileprivate weak var parent: ParallaxHeader!
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -46,6 +45,9 @@ class ParallaxView: UIView {
  The ParallaxHeader class represents a parallax header for UIScrollView.
  */
 public class ParallaxHeader: NSObject {
+    /**
+     Block to handle parallax header scrolling.
+     */
     public var parallaxHeaderDidScrollHandler: ParallaxHeaderHandlerBlock?
     private weak var _scrollView: UIScrollView?
     var scrollView: UIScrollView! {
@@ -70,14 +72,16 @@ public class ParallaxHeader: NSObject {
      */
     private var _contentView: UIView?
     var contentView: UIView {
-        if let contentView = _contentView {
+        get {
+            if let contentView = _contentView {
+                return contentView
+            }
+            let contentView = ParallaxView()
+            contentView.parent = self
+            contentView.clipsToBounds = true
+            _contentView = contentView
             return contentView
         }
-        let contentView = ParallaxView()
-        contentView.parent = self
-        contentView.clipsToBounds = true
-        _contentView = contentView
-        return contentView
     }
     /**
      The header's view.
@@ -132,11 +136,17 @@ public class ParallaxHeader: NSObject {
             layoutContentView()
         }
     }
+    /**
+     The header's minimum height while scrolling up. 0 by default.
+     */
     public var minimumHeight: CGFloat = 0 {
         didSet {
             layoutContentView()
         }
     }
+    /**
+     The parallax header progress value.
+     */
     private var _progress: CGFloat = 0
     public var progress: CGFloat {
         get {
@@ -404,7 +414,8 @@ public class ParallaxHeader: NSObject {
         inset.top = top
         scrollView.contentInset = inset
     }
-    override public func observeValue(forKeyPath keyPath: String?, of object: Any?,
+    override public func observeValue(forKeyPath keyPath: String?,
+                                      of object: Any?,
                                       change: [NSKeyValueChangeKey: Any]?,
                                       context: UnsafeMutableRawPointer?) {
         guard context == parallaxHeaderKVOContext,

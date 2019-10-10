@@ -18,21 +18,24 @@ class MovieListLandingViewController: UIViewController {
                                     forCellWithReuseIdentifier: ComponentMovieListCell.reuseIdentifier)
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        showOnViewTwins()
-        viewModel.loadMoreData()
-        self.title = "Movie List"
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UtilsFunction.showOnLoader()
+        viewModel.loadMoreData()
+        self.title = "Movie List"
         viewModel.reloadTable = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
                 self?.isRefreshInProgress = false
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
-                    self?.loadingView.hide()
-                    self?.loadingView.removeFromSuperview()
+                    UtilsFunction.hideOffLoader()
                 }
             }
         }
@@ -91,7 +94,7 @@ extension MovieListLandingViewController: UICollectionViewDelegate, UICollection
                         forItemAt indexPath: IndexPath) {
         if indexPath.row == viewModel.movieDataResult.count - 1 {
             // this is the last cell, load more data
-            showOnViewTwins()
+            UtilsFunction.showOnLoader()
             viewModel.loadMoreData()
         }
     }

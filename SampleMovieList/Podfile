@@ -7,7 +7,6 @@ target 'SampleMovieList' do
   pod 'SwiftLint'
   pod 'RSLoadingView'
   pod 'SnapKit'
-
   # Pods for SampleMovieList
 
   target 'SampleMovieListTests' do

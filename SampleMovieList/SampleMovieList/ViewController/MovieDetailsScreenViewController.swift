@@ -2,120 +2,76 @@
 //  MovieDetailsScreenViewController.swift
 //  SampleMovieList
 //
-//  Created by Chandresh on 9/10/19.
+//  Created by Chandresh on 10/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
 //
-
 import UIKit
-
 class MovieDetailsScreenViewController: MainBaseViewController {
     var viewModel: MovieDetailViewModel = MovieDetailViewModel(networkManager: NetworkManager())
-    var movieTittle: String? = ""
-    var movieSubTitle: String? = ""
-    var isRefreshInProgress = false
-    @IBOutlet weak var collectionView: UICollectionView! {
+    @IBOutlet weak var tblview: UITableView! {
         didSet {
-            self.parallaxCollectionView = collectionView
-            collectionView.register(MovieDetailCell.nib,
-                                    forCellWithReuseIdentifier: MovieDetailCell.reuseIdentifier)
-            collectionView.register(SimilarRelatedCollectionCell.nib,
-                                    forCellWithReuseIdentifier: SimilarRelatedCollectionCell.reuseIdentifier)
+            tblview.register(MovieDetailListCell.nib, forCellReuseIdentifier: MovieDetailListCell.reuseIdentifier)
+            tblview.register(SimilarRelatedMovieCell.nib,
+                             forCellReuseIdentifier: SimilarRelatedMovieCell.reuseIdentifier)
+            self.parallaxTableView = tblview
         }
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationView.imgPoster.loadImageUsingCache(withUrl: viewModel.movieDetailData?.posterPath ?? "")
-        self.title = viewModel.movieDetailData?.originalTitle?.uppercased()
-        self.showOnViewTwins()
-        self.viewModel.loadMoreData()
-        self.viewModel.reloadTable = { [weak self] in
-            self?.collectionView.reloadData()
-            self?.isRefreshInProgress = false
-            DispatchQueue.main.async {
-                self?.loadingView.hide()
-                self?.loadingView.removeFromSuperview()
-            }
-        }
-        // Do any additional setup after loading the view.
-    }
-    override var navigationType: NavigationType {
-        return .main
     }
     
-}
-// MARK: - UICollectioViewDataSource methods
-extension MovieDetailsScreenViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UtilsFunction.showOnLoader()
+        self.imageView.loadImageUsingCache(withUrl: viewModel.movieDetailData?.posterPath ?? "")
+        self.viewModel.loadMoreData()
+        self.viewModel.reloadTable = { [weak self] in
+            self?.tblview.reloadData()
+            DispatchQueue.main.async {
+                UtilsFunction.hideOffLoader()
+            }
+        }
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+}
+// MARK: - UITableViewDataSource Called Here
+extension MovieDetailsScreenViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.movieDataResult.count > 0 ? 2 : 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 3
+            return 4
         } else {
-           return 1
+            return 1
         }
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-                MovieDetailCell.reuseIdentifier, for: indexPath) as? MovieDetailCell
-            if indexPath.row == 0 {
-                movieTittle = "Movie Release Date"
-                movieSubTitle = viewModel.getDatefromString()
-                cell?.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
-            } else if indexPath.row == 1 {
-                movieTittle = "Movie Rating"
-                movieSubTitle = String(format: "%.1f / 10", viewModel.movieDetailData?.voteAverage ?? "")
-                cell?.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
-            } else if indexPath.row == 2 {
-                movieTittle = "Movie Description"
-                movieSubTitle = viewModel.movieDetailData?.overview
-                cell?.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailListCell.reuseIdentifier,
+                                                           for: indexPath)
+                as? MovieDetailListCell else { return UITableViewCell()
             }
-            return cell ?? UICollectionViewCell()
+            viewModel.getMovieDetailDatalist(indexPath, cell)
+            return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-            SimilarRelatedCollectionCell.reuseIdentifier, for: indexPath) as? SimilarRelatedCollectionCell
-        cell?.configureCellWithData(viewModel: viewModel)
-        return cell ?? UICollectionViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SimilarRelatedMovieCell.reuseIdentifier,
+                                                       for: indexPath)
+            as? SimilarRelatedMovieCell else { return UITableViewCell()
+        }
+        cell.configureCellWithData(viewModel: viewModel)
+        return cell
     }
 }
-extension MovieDetailsScreenViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+extension MovieDetailsScreenViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            if indexPath.row == 2 {
-                let descriptionHeight = UtilsFunction.heightOfLableAccordingContent(collectionView.frame.size.width,
-                                                                    FontUtils.footNote,
-                                                viewModel.movieDetailData?.overview ?? "",
-                                                numberOfLines: 0)
-                return CGSize(width: collectionView.frame.size.width,
-                              height: descriptionHeight + MovieDetailCell.cellHeight)
+            if indexPath.row == 3 {
+                let descriptionHeight = UtilsFunction.heightOfLableAccordingContent(
+                    self.view.frame.size.width,
+                    FontUtils.footNote,
+                    viewModel.movieDetailData?.overview ?? "",
+                    numberOfLines: 0)
+                return MovieDetailListCell.cellHeight + descriptionHeight
             }
-            return CGSize(width: collectionView.frame.size.width,
-                          height: MovieDetailCell.cellHeight)
+            return MovieDetailListCell.cellHeight
         }
-        return CGSize(width: collectionView.frame.size.width,
-                      height: SimilarRelatedCollectionCell.cellHeight)
+        return SimilarRelatedMovieCell.cellHeight
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0)
-    }
-    @objc(collectionView:
-    layout:
-    minimumLineSpacingForSectionAtIndex:) func collectionView(_ collectionView: UICollectionView,
-                                                              layout collectionViewLayout: UICollectionViewLayout,
-                                                              minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
-    }
-
 }

@@ -13,6 +13,8 @@ class MovieDetailViewModel: MovieDetailProtocol, BaseProtocols {
     var movieDataResult: [MovieResult] = [MovieResult]()
     var movieDetailData: MovieResult?
     var networkManager: NetworkManager!
+    var movieTittle: String? = ""
+    var movieSubTitle: String? = ""
     var page: Int = 1
     var totalPages: Int = 1
     var reloadTable: () -> Void = { }
@@ -62,5 +64,24 @@ extension MovieDetailViewModel: reloadDataWithCollectionView {
         }
         return strDate ?? ""
     }
-    
+    func getMovieDetailDatalist(_ indexPath: IndexPath, _ cell: MovieDetailListCell) {
+        if indexPath.row == 0 {
+            movieTittle = self.movieDetailData?.originalTitle?.uppercased()
+            cell.lblSubTittle.isHidden = true
+            cell.lblTittle.font = FontUtils.title1
+            cell.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+        } else if indexPath.row == 1 {
+            movieTittle = "Release Date"
+            movieSubTitle = self.getDatefromString()
+            cell.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+        } else if indexPath.row == 2 {
+            movieTittle = "Rating"
+            movieSubTitle = String(format: "%.1f / 10", self.movieDetailData?.voteAverage ?? "")
+            cell.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+        } else if indexPath.row == 3 {
+            movieTittle = "Synopsis"
+            movieSubTitle = self.movieDetailData?.overview
+            cell.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
+        }
+    }
 }

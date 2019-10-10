@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
+import RSLoadingView
+
 struct UtilsFunction {
+    static var loadingView = RSLoadingView(effectType: RSLoadingView.Effect.spinAlone)
+
     static func heightOfLableAccordingContent(_ width: CGFloat,
-                                       _ font: UIFont,
-                                       _ text: String,
-                                       numberOfLines: Int ) -> CGFloat {
+                                              _ font: UIFont,
+                                              _ text: String, numberOfLines: Int ) -> CGFloat {
         let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = numberOfLines
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -20,5 +23,18 @@ struct UtilsFunction {
         label.text = text
         label.sizeToFit()
         return label.frame.height
+    }
+    static func showOnLoader() {
+        loadingView.shouldTapToDismiss = true
+        loadingView.variantKey = "inAndOut"
+        loadingView.speedFactor = 1.0
+        loadingView.lifeSpanFactor = 2.0
+        loadingView.mainColor = UIColor.green
+        loadingView.sizeInContainer = CGSize(width: 100, height: 100)
+        loadingView.showOnKeyWindow()
+    }
+    static func hideOffLoader() {
+        self.loadingView.hide()
+        self.loadingView.removeFromSuperview()
     }
 }

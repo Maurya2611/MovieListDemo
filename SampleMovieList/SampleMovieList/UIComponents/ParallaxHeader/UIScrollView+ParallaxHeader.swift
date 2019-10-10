@@ -1,10 +1,16 @@
+//
+//  UIScrollView+ParallaxHeader.swift
+//  SampleMovieList
+//  Created by Chandresh on 8/10/19.
+//  Copyright © 2019 Chandresh. All rights reserved.
+//
 import UIKit
 import ObjectiveC.runtime
 /**
  A UIScrollView extension with a ParallaxHeader.
  */
 extension UIScrollView {
-        private struct AssociatedKeys {
+    private struct AssociatedKeys {
         static var descriptiveName = "AssociatedKeys.DescriptiveName.parallaxHeader"
     }
     /**
@@ -33,3 +39,4 @@ extension UIScrollView {
         }
     }
 }
+

@@ -7,7 +7,7 @@
 //
 import UIKit
 import Foundation
-
+import SnapKit
 public class CDCarouselBGView: BaseView {
     static public func viewFromNib() -> CDCarouselBGView {
         return (nib.instantiate(withOwner: nil, options: nil).first as? CDCarouselBGView)!

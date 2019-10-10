@@ -1,23 +1,17 @@
 //
-//  MovieDetailCell.swift
+//  MovieDetailListCell.swift
 //  SampleMovieList
 //
-//  Created by Chandresh on 9/10/19.
+//  Created by Chandresh on 10/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
 //
 
 import UIKit
-class MovieDetailCell: BaseCell {
-    static let cellHeight: CGFloat = 80
-    @IBOutlet weak var viewBG: UIView! {
-        didSet {
-            viewBG.layer.masksToBounds = true
-            viewBG.clipsToBounds = true
-        }
-    }
+class MovieDetailListCell: BaseReusableTableView {
+    static let cellHeight: CGFloat = 70
     @IBOutlet weak var lblTittle: UILabel! {
         didSet {
-            lblTittle.font = FontUtils.title2
+            lblTittle.font = FontUtils.title3
             lblTittle.textColor = ColorUtils.charcoalGray
         }
     }

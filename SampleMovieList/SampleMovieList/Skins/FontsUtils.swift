@@ -39,10 +39,10 @@ struct FontUtils: FontProtocol {
         return font
     }
     static var title0: UIFont {
-        return mightyBaseFont(size: 38.0, weight: .bold)
+        return mightyBaseFont(size: 34.0, weight: .bold)
     }
     static var title1: UIFont {
-        return mightyBaseFont(size: 28.0, weight: .bold) //done
+        return mightyBaseFont(size: 26.0, weight: .bold) //done
     }
     static var title2: UIFont {
         return mightyBaseFont(size: 22.0, weight: .bold) //done
