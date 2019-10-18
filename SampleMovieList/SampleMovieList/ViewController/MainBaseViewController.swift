@@ -61,7 +61,7 @@ class MainBaseViewController: UIViewController {
         return UIDevice.current.systemVersion.compare(version, options: .numeric) == .orderedAscending
     }
 }
-extension UIViewController {
+extension MainBaseViewController {
     typealias MethodHandler = () -> Void
     func topSafeArea() -> CGFloat {
         var safeArea: CGFloat = 20.0

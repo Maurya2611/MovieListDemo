@@ -1,6 +1,7 @@
 //
 //  ParallaxHeader.swift
 //  SampleMovieList
+//
 //  Created by Chandresh on 8/10/19.
 //  Copyright © 2019 Chandresh. All rights reserved.
 //
@@ -11,7 +12,6 @@ private let parallaxHeaderKVOContext = UnsafeMutableRawPointer.allocate(
     byteCount: 4,
     alignment: 1
 )
-
 class ParallaxView: UIView {
     fileprivate weak var parent: ParallaxHeader!
     override func willMove(toSuperview newSuperview: UIView?) {
