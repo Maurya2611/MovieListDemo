@@ -7,7 +7,7 @@
 //
 import Foundation
 import UIKit
-enum NetworkResponse: String {
+enum ServerResponse: String {
     case success
     case authenticationError = "You need to be authenticated first."
     case badRequest = "Bad request"
@@ -21,9 +21,9 @@ enum Result<String> {
     case failure(String)
 }
 struct NetworkManager {
-    static let environment: NetworkEnvironment = .production
+    static let environment: ServerEnvironment = .production
     static let movieAPIKey = BaseConstant.movieAppKey
-    let router = BaseNetworkRouter<GetMovielistApi>()
+    let router = BaseNetworkRouter<GetMovieListApi>()
     func getNowPlayingListData(page: Int,
                                completion: @escaping (_ dataModel: BaseDataModel?,
         _ error: String?) -> Void) {
@@ -36,7 +36,7 @@ struct NetworkManager {
                 switch result {
                 case .success:
                     guard let responseData = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
+                        completion(nil, ServerResponse.noData.rawValue)
                         return
                     }
                     do {
@@ -45,7 +45,7 @@ struct NetworkManager {
                         completion(apiResponse, nil)
                     } catch {
                         print(error)
-                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                        completion(nil, ServerResponse.unableToDecode.rawValue)
                     }
                 case .failure(let networkFailureError):
                     completion(nil, networkFailureError)
@@ -66,7 +66,7 @@ struct NetworkManager {
                 switch result {
                 case .success:
                     guard let responseData = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
+                        completion(nil, ServerResponse.noData.rawValue)
                         return
                     }
                     do {
@@ -75,7 +75,7 @@ struct NetworkManager {
                         completion(apiResponse, nil)
                     } catch {
                         print(error)
-                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                        completion(nil, ServerResponse.unableToDecode.rawValue)
                     }
                 case .failure(let networkFailureError):
                     completion(nil, networkFailureError)
@@ -86,10 +86,10 @@ struct NetworkManager {
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String> {
         switch response.statusCode {
         case 200...299: return .success
-        case 401...500: return .failure(NetworkResponse.authenticationError.rawValue)
-        case 501...599: return .failure(NetworkResponse.badRequest.rawValue)
-        case 600: return .failure(NetworkResponse.outdated.rawValue)
-        default: return .failure(NetworkResponse.failed.rawValue)
+        case 401...500: return .failure(ServerResponse.authenticationError.rawValue)
+        case 501...599: return .failure(ServerResponse.badRequest.rawValue)
+        case 600: return .failure(ServerResponse.outdated.rawValue)
+        default: return .failure(ServerResponse.failed.rawValue)
         }
     }
 }

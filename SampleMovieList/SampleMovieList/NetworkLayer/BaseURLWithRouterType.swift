@@ -7,15 +7,15 @@
 //
 
 import Foundation
-enum NetworkEnvironment {
+enum ServerEnvironment {
     case production
     case staging
 }
-public enum GetMovielistApi {
+public enum GetMovieListApi {
     case nowPlaying(page: Int)
     case similar(movieId: Int)
 }
-extension GetMovielistApi: NetworkRouterType {
+extension GetMovieListApi: ServerRouterType {
     var environmentBaseURL: String {
         switch NetworkManager.environment {
         case .production: return "https://api.themoviedb.org/3/movie/"

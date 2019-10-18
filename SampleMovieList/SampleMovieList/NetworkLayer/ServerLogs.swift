@@ -5,7 +5,7 @@
 //  Copyright © 2019 Chandresh Maurya. All rights reserved.
 
 import Foundation
-class NetworkLogs {
+class ServerLogs {
     static func log(request: URLRequest) {
         print("\n - - - - - - - - - - OUTGOING - - - - - - - - - - \n")
         let urlBaseString = request.url?.absoluteString ?? ""

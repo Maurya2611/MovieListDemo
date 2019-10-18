@@ -5,19 +5,19 @@
 //  Copyright © 2019 Chandresh Maurya. All rights reserved.
 //
 import Foundation
-public typealias NetworkRouterCompletion = (_ dataModel: Data?, _ response: URLResponse?, _ error: Error?) -> Void
+public typealias ServerRouterCompletion = (_ dataModel: Data?, _ response: URLResponse?, _ error: Error?) -> Void
 protocol NetworkRouter: class {
-    associatedtype EndPoint: NetworkRouterType
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion)
+    associatedtype EndPoint: ServerRouterType
+    func request(_ route: EndPoint, completion: @escaping ServerRouterCompletion)
     func cancel()
 }
-class BaseNetworkRouter<EndPoint: NetworkRouterType>: NetworkRouter {
+class BaseNetworkRouter<RouterType: ServerRouterType>: NetworkRouter {
     private var task: URLSessionTask?
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
+    func request(_ route: RouterType, completion: @escaping ServerRouterCompletion) {
         let session = URLSession.shared
         do {
             let request = try self.buildRequest(from: route)
-            NetworkLogs.log(request: request)
+            ServerLogs.log(request: request)
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 completion(data, response, error)
             })
@@ -29,7 +29,7 @@ class BaseNetworkRouter<EndPoint: NetworkRouterType>: NetworkRouter {
     func cancel() {
         self.task?.cancel()
     }
-    fileprivate func buildRequest(from route: EndPoint) throws -> URLRequest {
+    fileprivate func buildRequest(from route: RouterType) throws -> URLRequest {
         var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: 10.0)
@@ -41,9 +41,9 @@ class BaseNetworkRouter<EndPoint: NetworkRouterType>: NetworkRouter {
             case .requestParameters(let bodyParameters,
                                     let bodyEncoding,
                                     let urlParameters): try self.configureParameters(bodyParameters: bodyParameters,
-                                        bodyEncoding: bodyEncoding,
-                                        urlParameters: urlParameters,
-                                        request: &request)
+                                                                                     bodyEncoding: bodyEncoding,
+                                                                                     urlParameters: urlParameters,
+                                                                                     request: &request)
             case .requestParametersWithHeaders(let bodyParameters,
                                                let bodyEncoding,
                                                let urlParameters,

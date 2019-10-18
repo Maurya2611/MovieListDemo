@@ -5,7 +5,7 @@
 //  Copyright © 2019 Chandresh Maurya. All rights reserved.
 //
 import Foundation
-protocol NetworkRouterType {
+protocol ServerRouterType {
     var baseURL: URL { get }
     var path: String { get }
     var httpMethod: HTTPMethod { get }

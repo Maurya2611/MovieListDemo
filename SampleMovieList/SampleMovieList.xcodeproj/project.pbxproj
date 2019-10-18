@@ -45,10 +45,10 @@
 		E0A2FFBA234C40A800425C79 /* BaseURLWithRouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFAF234C40A700425C79 /* BaseURLWithRouterType.swift */; };
 		E0A2FFBB234C40A800425C79 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB1234C40A700425C79 /* ParameterEncoding.swift */; };
 		E0A2FFBE234C40A800425C79 /* BaseNetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB4234C40A800425C79 /* BaseNetworkRouter.swift */; };
-		E0A2FFBF234C40A800425C79 /* NetworkLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB5234C40A800425C79 /* NetworkLogs.swift */; };
+		E0A2FFBF234C40A800425C79 /* ServerLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB5234C40A800425C79 /* ServerLogs.swift */; };
 		E0A2FFC0234C40A800425C79 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB6234C40A800425C79 /* NetworkManager.swift */; };
 		E0A2FFC1234C40A800425C79 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB7234C40A800425C79 /* HTTPTask.swift */; };
-		E0A2FFC2234C40A800425C79 /* NetworkRouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB8234C40A800425C79 /* NetworkRouterType.swift */; };
+		E0A2FFC2234C40A800425C79 /* ServerRouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB8234C40A800425C79 /* ServerRouterType.swift */; };
 		E0A2FFC3234C40A800425C79 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB9234C40A800425C79 /* HTTPMethod.swift */; };
 		E0A2FFC7234C4E2A00425C79 /* BaseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFC6234C4E2A00425C79 /* BaseDataModel.swift */; };
 		E0A2FFCA234C4F7B00425C79 /* BaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFC9234C4F7B00425C79 /* BaseProtocols.swift */; };
@@ -134,10 +134,10 @@
 		E0A2FFAF234C40A700425C79 /* BaseURLWithRouterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseURLWithRouterType.swift; sourceTree = "<group>"; };
 		E0A2FFB1234C40A700425C79 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		E0A2FFB4234C40A800425C79 /* BaseNetworkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNetworkRouter.swift; sourceTree = "<group>"; };
-		E0A2FFB5234C40A800425C79 /* NetworkLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogs.swift; sourceTree = "<group>"; };
+		E0A2FFB5234C40A800425C79 /* ServerLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLogs.swift; sourceTree = "<group>"; };
 		E0A2FFB6234C40A800425C79 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E0A2FFB7234C40A800425C79 /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
-		E0A2FFB8234C40A800425C79 /* NetworkRouterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRouterType.swift; sourceTree = "<group>"; };
+		E0A2FFB8234C40A800425C79 /* ServerRouterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRouterType.swift; sourceTree = "<group>"; };
 		E0A2FFB9234C40A800425C79 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		E0A2FFC6234C4E2A00425C79 /* BaseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDataModel.swift; sourceTree = "<group>"; };
 		E0A2FFC9234C4F7B00425C79 /* BaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocols.swift; sourceTree = "<group>"; };
@@ -350,9 +350,9 @@
 				E0A2FFAF234C40A700425C79 /* BaseURLWithRouterType.swift */,
 				E0A2FFB9234C40A800425C79 /* HTTPMethod.swift */,
 				E0A2FFB7234C40A800425C79 /* HTTPTask.swift */,
-				E0A2FFB5234C40A800425C79 /* NetworkLogs.swift */,
+				E0A2FFB5234C40A800425C79 /* ServerLogs.swift */,
 				E0A2FFB6234C40A800425C79 /* NetworkManager.swift */,
-				E0A2FFB8234C40A800425C79 /* NetworkRouterType.swift */,
+				E0A2FFB8234C40A800425C79 /* ServerRouterType.swift */,
 				E0A2004A234F04C900425C79 /* NetworkReachability.swift */,
 			);
 			path = NetworkLayer;
@@ -715,12 +715,12 @@
 				E0A2FFA1234C338900425C79 /* MovieListLandingViewController.swift in Sources */,
 				E0A2002C234EC4AA00425C79 /* MovieDetailsScreenViewController.swift in Sources */,
 				E0A2FFD0234C733A00425C79 /* UIImageView+Extension.swift in Sources */,
-				E0A2FFBF234C40A800425C79 /* NetworkLogs.swift in Sources */,
+				E0A2FFBF234C40A800425C79 /* ServerLogs.swift in Sources */,
 				E0A2FFF6234D9A5800425C79 /* MovieMainBaseView.swift in Sources */,
 				E0A20048234EE39500425C79 /* SimilarRelatedMovieCell.swift in Sources */,
 				E0A2000D234DCD0900425C79 /* UtilsFunction.swift in Sources */,
 				E0A2001C234DD34900425C79 /* CarouselContentViewCell.swift in Sources */,
-				E0A2FFC2234C40A800425C79 /* NetworkRouterType.swift in Sources */,
+				E0A2FFC2234C40A800425C79 /* ServerRouterType.swift in Sources */,
 				E0A2FFCA234C4F7B00425C79 /* BaseProtocols.swift in Sources */,
 				E0A2004B234F04C900425C79 /* NetworkReachability.swift in Sources */,
 			);
