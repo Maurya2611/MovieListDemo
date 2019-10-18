@@ -21,27 +21,27 @@ public enum ParameterEncoding {
             switch self {
             case .urlEncoding:
                 guard let urlParameters = urlParameters else { return }
-                try URLParamEncoder().paramEncode(urlRequest: &urlRequest, with: urlParameters)
+                try UrlRequestEncoder().paramEncode(urlRequest: &urlRequest, with: urlParameters)
             case .jsonEncoding:
                 guard let bodyParameters = bodyParameters else { return }
-                try JSONParamEncoder().paramEncode(urlRequest: &urlRequest, with: bodyParameters)
+                try JSONRequestEncoder().paramEncode(urlRequest: &urlRequest, with: bodyParameters)
             case .urlWithJsonEncoding:
                 guard let bodyParameters = bodyParameters,
                     let urlParameters = urlParameters else { return }
-                try URLParamEncoder().paramEncode(urlRequest: &urlRequest, with: urlParameters)
-                try JSONParamEncoder().paramEncode(urlRequest: &urlRequest, with: bodyParameters)
+                try UrlRequestEncoder().paramEncode(urlRequest: &urlRequest, with: urlParameters)
+                try JSONRequestEncoder().paramEncode(urlRequest: &urlRequest, with: bodyParameters)
             }
         } catch {
             throw error
         }
     }
 }
-public enum NetworkErrorCode: String, Error {
+public enum ServerErrorCode: String, Error {
     case parametersNil = "Parameters were nil."
     case encodingFailed = "Parameter encoding failed."
     case missingURL = "URL is nil."
 }
-public struct JSONParamEncoder: ParameterEncoder {
+public struct JSONRequestEncoder: ParameterEncoder {
     public func paramEncode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
         do {
             let jsonAsData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
@@ -50,13 +50,13 @@ public struct JSONParamEncoder: ParameterEncoder {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
         } catch {
-            throw NetworkErrorCode.encodingFailed
+            throw ServerErrorCode.encodingFailed
         }
     }
 }
-public struct URLParamEncoder: ParameterEncoder {
+public struct UrlRequestEncoder: ParameterEncoder {
     public func paramEncode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
-        guard let url = urlRequest.url else { throw NetworkErrorCode.missingURL }
+        guard let url = urlRequest.url else { throw ServerErrorCode.missingURL }
         if var urlComponents = URLComponents(url: url,
                                              resolvingAgainstBaseURL: false), !parameters.isEmpty {
             urlComponents.queryItems = [URLQueryItem]()
