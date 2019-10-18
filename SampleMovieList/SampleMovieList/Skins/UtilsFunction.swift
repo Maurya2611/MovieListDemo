@@ -37,4 +37,15 @@ struct UtilsFunction {
         self.loadingView.hide()
         self.loadingView.removeFromSuperview()
     }
+    static func getDatefromString(strDate: String?) -> String {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
+        var releaseDate = strDate ?? ""
+        if let date = dateFormatterGet.date(from: strDate ?? "") {
+            releaseDate = dateFormatterPrint.string(from: date)
+        }
+        return releaseDate
+    }
 }

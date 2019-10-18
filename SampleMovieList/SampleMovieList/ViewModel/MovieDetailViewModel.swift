@@ -19,7 +19,7 @@ class MovieDetailViewModel: MovieDetailProtocol, BaseProtocols {
     var totalPages: Int = 1
     var reloadTable: () -> Void = { }
     var navigateSimilarMovieWithData: ((MovieResult) -> Void)?
-
+    
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }
@@ -29,18 +29,18 @@ extension MovieDetailViewModel: reloadDataWithCollectionView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.networkManager.getSimilarMovieData(movieID:
                 self.movieDetailData?.movieId ?? 0, completion: { ( movies, error) in
-                        if let serverError = error, !serverError.isEmpty {
-                        } else {
-                            DispatchQueue.main.async {
-                                guard movies != nil else {
-                                    return
-                                }
-                                self.movieDataResult += movies?.movieResults ?? self.movieDataResult
-                                self.page += 1
-                                self.totalPages = movies?.totalPages ?? 1
-                                completion()
+                    if let serverError = error, !serverError.isEmpty {
+                    } else {
+                        DispatchQueue.main.async {
+                            guard movies != nil else {
+                                return
+                            }
+                            self.movieDataResult += movies?.movieResults ?? self.movieDataResult
+                            self.page += 1
+                            self.totalPages = movies?.totalPages ?? 1
+                            completion()
+                        }
                     }
-                }
             })
         }
     }
@@ -55,17 +55,7 @@ extension MovieDetailViewModel: reloadDataWithCollectionView {
     func shouldLoadMoreData(totalPage: Int, totalPageLoaded: Int) -> Bool {
         return ( totalPage >= totalPageLoaded )
     }
-    func getDatefromString() -> String {
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd"
-        let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
-        var strDate = self.movieDetailData?.releaseDate
-        if let date = dateFormatterGet.date(from: self.movieDetailData?.releaseDate ?? "") {
-            strDate = dateFormatterPrint.string(from: date)
-        }
-        return strDate ?? ""
-    }
+   
     func getMovieDetailDatalist(_ indexPath: IndexPath, _ cell: MovieDetailListCell) {
         if indexPath.row == 0 {
             movieTittle = self.movieDetailData?.originalTitle?.uppercased()
@@ -74,7 +64,7 @@ extension MovieDetailViewModel: reloadDataWithCollectionView {
             cell.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
         } else if indexPath.row == 1 {
             movieTittle = "Release Date"
-            movieSubTitle = self.getDatefromString()
+            movieSubTitle = UtilsFunction.getDatefromString(strDate: self.movieDetailData?.releaseDate)
             cell.configureCellWithData(tittle: movieTittle, subTittle: movieSubTitle)
         } else if indexPath.row == 2 {
             movieTittle = "Rating"
