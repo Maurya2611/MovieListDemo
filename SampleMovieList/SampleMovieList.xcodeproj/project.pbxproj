@@ -42,7 +42,7 @@
 		E0A2FFA7234C35A000425C79 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFA4234C35A000425C79 /* BaseView.swift */; };
 		E0A2FFAB234C36A700425C79 /* ComponentMovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFA9234C36A700425C79 /* ComponentMovieListCell.swift */; };
 		E0A2FFAC234C36A700425C79 /* ComponentMovieListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0A2FFAA234C36A700425C79 /* ComponentMovieListCell.xib */; };
-		E0A2FFBA234C40A800425C79 /* BaseURLWithRouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFAF234C40A700425C79 /* BaseURLWithRouterType.swift */; };
+		E0A2FFBA234C40A800425C79 /* BaseURLServerRouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFAF234C40A700425C79 /* BaseURLServerRouterType.swift */; };
 		E0A2FFBB234C40A800425C79 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB1234C40A700425C79 /* ParameterEncoding.swift */; };
 		E0A2FFBE234C40A800425C79 /* BaseNetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB4234C40A800425C79 /* BaseNetworkRouter.swift */; };
 		E0A2FFBF234C40A800425C79 /* ServerLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2FFB5234C40A800425C79 /* ServerLogs.swift */; };
@@ -131,7 +131,7 @@
 		E0A2FFA4234C35A000425C79 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		E0A2FFA9234C36A700425C79 /* ComponentMovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentMovieListCell.swift; sourceTree = "<group>"; };
 		E0A2FFAA234C36A700425C79 /* ComponentMovieListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComponentMovieListCell.xib; sourceTree = "<group>"; };
-		E0A2FFAF234C40A700425C79 /* BaseURLWithRouterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseURLWithRouterType.swift; sourceTree = "<group>"; };
+		E0A2FFAF234C40A700425C79 /* BaseURLServerRouterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseURLServerRouterType.swift; sourceTree = "<group>"; };
 		E0A2FFB1234C40A700425C79 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		E0A2FFB4234C40A800425C79 /* BaseNetworkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNetworkRouter.swift; sourceTree = "<group>"; };
 		E0A2FFB5234C40A800425C79 /* ServerLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLogs.swift; sourceTree = "<group>"; };
@@ -347,7 +347,7 @@
 			children = (
 				E0A2FFB0234C40A700425C79 /* Encoding */,
 				E0A2FFB4234C40A800425C79 /* BaseNetworkRouter.swift */,
-				E0A2FFAF234C40A700425C79 /* BaseURLWithRouterType.swift */,
+				E0A2FFAF234C40A700425C79 /* BaseURLServerRouterType.swift */,
 				E0A2FFB9234C40A800425C79 /* HTTPMethod.swift */,
 				E0A2FFB7234C40A800425C79 /* HTTPTask.swift */,
 				E0A2FFB5234C40A800425C79 /* ServerLogs.swift */,
@@ -701,7 +701,7 @@
 				E0A2FFC1234C40A800425C79 /* HTTPTask.swift in Sources */,
 				E0A2FFE2234C7A4900425C79 /* ColorUtils.swift in Sources */,
 				E0A20041234EDE2C00425C79 /* ParallaxHeaderMode.swift in Sources */,
-				E0A2FFBA234C40A800425C79 /* BaseURLWithRouterType.swift in Sources */,
+				E0A2FFBA234C40A800425C79 /* BaseURLServerRouterType.swift in Sources */,
 				E0A2FFA7234C35A000425C79 /* BaseView.swift in Sources */,
 				E0A20038234ED8CE00425C79 /* MainBaseViewController.swift in Sources */,
 				E0A2FFA6234C35A000425C79 /* BaseCell.swift in Sources */,
